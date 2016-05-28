@@ -66,7 +66,7 @@ namespace dbConnectAnd
                 MySqlCommand get = conn.CreateCommand();
                 get.CommandText = string.Format("INSERT INTO entry_log(student_id, student_name, year, time) VALUES ('{0}', '{1}', '{2}', '{3}') ", student_id, student_name, year, time);
                 MySqlDataReader data = get.ExecuteReader();
-                MainWindow.lblStatus.Content = "You may Enter ";
+                lblStatus.Content = "You may Enter ";
                 txtRegNum.Text = "";
                 txtRegNum.Focus();
             }

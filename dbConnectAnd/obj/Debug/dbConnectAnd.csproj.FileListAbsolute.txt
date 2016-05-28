@@ -17,3 +17,5 @@ c:\users\helpdesk2-pc\documents\visual studio 2015\Projects\dbConnectAnd\dbConne
 c:\users\helpdesk2-pc\documents\visual studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Debug\dbConnectAnd.csproj.GenerateResource.Cache
 c:\users\helpdesk2-pc\documents\visual studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Debug\dbConnectAnd.exe
 c:\users\helpdesk2-pc\documents\visual studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Debug\dbConnectAnd.pdb
+C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Debug\searchDB.g.cs
+C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Debug\searchDB.baml
