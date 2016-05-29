@@ -27,37 +27,41 @@ namespace dbConnectAnd
             InitializeComponent();
         }
 
+        /*Function to retrieve all instances of an id in the log database and display it to the viewer
+            Function not final product 
+            Subject to change at any time
+        */
 
         public void search() {
             MySqlConnection conn = null;
-            MySqlCommand cmd = null;
-            DataTable dataTable = new DataTable();
-            string student_id = txtRegNum.Text;
+            MySqlCommand cmd = null;//initialise MySql connection variables to null
+            DataTable dataTable = new DataTable();//Create new datatable instance to store data from db
+            string student_id = txtRegNum.Text;//Get student id from text box
             try
             {
                 string sql =string.Format("SELECT * FROM entry_log WHERE student_id = '{0}' ", student_id.ToLower());
 
                 conn = new MySqlConnection("server = 192.168.1.27; user = root; database = lab1_log ; port = 3306; password = admin123;");
 
-                cmd = new MySqlCommand(sql, conn);
+                cmd = new MySqlCommand(sql, conn);//Execute the select statement againt the lab1_log db
 
-                conn.Open();
+                conn.Open();//Open Connection
 
-                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))
+                using (MySqlDataAdapter da = new MySqlDataAdapter(cmd))//get the data using MySqlAdapter
                 {
-                    da.Fill(dataTable);
+                    da.Fill(dataTable);//Self Explanatory Statement
                 }
-
+                //Populate datagrid in Window with data retrieved
                 dataGridView.ItemsSource = dataTable.DefaultView;
                 dataGridView.DataContext = dataTable.TableName;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error");
+                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error");//Capture Error
             }
             finally
             {
-                if (conn != null) conn.Close();
+                if (conn != null) conn.Close();//Close Connection
             }
         }
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
