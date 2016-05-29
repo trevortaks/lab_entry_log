@@ -1,6 +1,0 @@
-C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Release\dbConnectAnd.csprojResolveAssemblyReference.cache
-C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Release\dbConnectAnd.csproj.dbConnectAnd.exe.config
-C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Release\MainWindow.g.cs
-C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Release\App.g.cs
-C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Release\dbConnectAnd_MarkupCompile.cache
-C:\Users\HelpDesk2-PC\Documents\Visual Studio 2015\Projects\dbConnectAnd\dbConnectAnd\obj\Release\dbConnectAnd_MarkupCompile.lref
