@@ -6,12 +6,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:dbConnectAnd"
         mc:Ignorable="d"
-        Title="Computer Laboratory Entry Logging System" Height="454" Width="568">
-    <Grid HorizontalAlignment="Left" Height="352" VerticalAlignment="Top" Width="558" Margin="0,0,0,-1">
+        Title="Computer Laboratory Security Logging System (Name Subject to Change)" Height="548" Width="689">
+    <Grid Margin="0,0,2,106">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="79*"/>
+            <RowDefinition Height="58*"/>
+            <RowDefinition Height="73*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="3*"/>
+
+        </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
+
+            <ColumnDefinition Width="202*"/>
+            <ColumnDefinition Width="91*"/>
+            <ColumnDefinition Width="252*"/>
+            <ColumnDefinition Width="134*"/>
+
         </Grid.ColumnDefinitions>
         <!--<DockPanel Margin="3,0,7,324">
             <TextBox AcceptsReturn="True" Margin="0,0,0,-417" Width="547" />
@@ -24,20 +37,20 @@
                 </TabItem>
             </TabControl>
         </DockPanel>-->
-        <TextBox x:Name="txtRegNum" HorizontalAlignment="Left" Height="32" Margin="248,33,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" FontSize="18.667" MaxLength="9" KeyDown="txtRegNum_KeyDown" Grid.Column="2"/>
+        <TextBox x:Name="txtRegNum" Margin="10,14,0,0" TextWrapping="Wrap" FontSize="18.667" MaxLength="9" KeyDown="txtRegNum_KeyDown" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Height="41" VerticalAlignment="Top"/>
 
-        <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="391,33,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.133,0" Height="32" Click="btnSubmit_Click" Grid.Column="2"/>
-        <Label x:Name="lblRegistration" Content="Registration Number:" HorizontalAlignment="Left" Margin="0,105,0,0" VerticalAlignment="Top" Width="185" FontSize="18.667" Height="38" Grid.Column="2"/>
-        <Label x:Name="lblRegNum" Content="" HorizontalAlignment="Left" Margin="248,105,0,0" VerticalAlignment="Top" Width="218" Height="38" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblStudentName" Content="Name:" HorizontalAlignment="Left" Margin="0,163,0,0" VerticalAlignment="Top" Width="159" Height="36" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblName" Content="" HorizontalAlignment="Left" Margin="248,163,0,0" VerticalAlignment="Top" Width="218" Height="36" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblStudentProgram" Content="Program:" HorizontalAlignment="Left" Margin="1,218,0,0" VerticalAlignment="Top" Width="159" Height="42" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblEntryTime" Content="Entry Time:" HorizontalAlignment="Left" Margin="1,283,0,0" VerticalAlignment="Top" Width="159" Height="40" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblTime" Content="" HorizontalAlignment="Left" Margin="248,283,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,0.385" Height="40" Width="218" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblProgram" Content="" HorizontalAlignment="Left" Margin="248,218,0,0" VerticalAlignment="Top" Height="42" Width="218" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblEnter" Content="Enter Reg Num" HorizontalAlignment="Left" Margin="1,33,0,0" VerticalAlignment="Top" Height="41" Width="185" FontSize="18.667" Grid.Column="2"/>
-        <Label x:Name="lblStatus" Content="" HorizontalAlignment="Left" Height="73" Margin="1,351,0,-72" VerticalAlignment="Top" RenderTransformOrigin="-0.061,0.483" Width="557" FontSize="32" Grid.Column="2"/>
-        <Button x:Name="btnSearch" Grid.ColumnSpan="3" Content="Search" HorizontalAlignment="Left" VerticalAlignment="Top" Width="85" Height="33" Click="btnSearch_Click"/>
+        <Button x:Name="btnSubmit" Content="SUBMIT" Margin="10,14,0,0" RenderTransformOrigin="0.133,0" Click="btnSubmit_Click" Grid.Column="3" Grid.Row="1" Height="41" VerticalAlignment="Top"/>
+        <Label x:Name="lblRegistration" Content="Registration Number:" Margin="0,12,10,0" VerticalAlignment="Top" FontSize="18.667" Height="38" Grid.Row="2"/>
+        <Label x:Name="lblRegNum" Content="" Margin="0,12,0,0" VerticalAlignment="Top" Height="38" FontSize="18.667" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblStudentName" Content="Name:" Margin="0,7" FontSize="18.667" Grid.Row="3"/>
+        <Label x:Name="lblName" Content="" Margin="0,7,0,0" VerticalAlignment="Top" Height="36" FontSize="18.667" Grid.Column="2" Grid.Row="3" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblStudentProgram" Content="Program:" Margin="0,10" FontSize="18.667" Grid.Row="4"/>
+        <Label x:Name="lblEntryTime" Content="Entry Time:" Margin="0,11,0,26" FontSize="18.667" Grid.Row="5"/>
+        <Label x:Name="lblTime" Content="" Margin="0,15,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.132,0.385" Height="40" FontSize="18.667" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblProgram" Content="" Margin="0,10,0,0" VerticalAlignment="Top" Height="42" FontSize="18.667" Grid.Column="2" Grid.Row="4" Grid.ColumnSpan="2"/>
+        <Label x:Name="lblEnter" Content="Enter Reg Num" Margin="0,14,0,5" FontSize="18.667" Grid.Row="1" RenderTransformOrigin="0.49,0.792"/>
+        <Label x:Name="lblStatus" Content="" Margin="0,2,0,-107" RenderTransformOrigin="-0.061,0.483" FontSize="32" Grid.ColumnSpan="4" Grid.Row="6"/>
+        <Button x:Name="btnSearch" Content="FIND" Click="btnSearch_Click" Margin="10,0,0,0" Grid.Column="3" Height="39" VerticalAlignment="Top"/>
     </Grid>
 
 </Window>

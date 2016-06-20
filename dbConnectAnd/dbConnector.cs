@@ -10,7 +10,7 @@ namespace dbConnectAnd
 {
     public class dbConnector: MainWindow
     {
-        static string connStr = "server = 192.168.1.27; user = root; database = lab1_log ; port = 3306; password = admin123;";
+        static string connStr = "server = 192.168.1.27; user = db_admin; database = lab_log ; port = 3306; password = angelus04;";
         
         public dbConnector()
         {

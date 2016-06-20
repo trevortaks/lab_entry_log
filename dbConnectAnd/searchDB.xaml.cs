@@ -14,6 +14,9 @@ using System.Windows.Shapes;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using System.Data;
+using System.Globalization;
+using System.Threading;
+using Xceed.Wpf.Toolkit;
 
 namespace dbConnectAnd
 {
@@ -25,6 +28,10 @@ namespace dbConnectAnd
         public searchDB()
         {
             InitializeComponent();
+           /* CultureInfo ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
+            ci.DateTimeFormat.ShortDatePattern = "yyyy-MM-dd";
+            Thread.CurrentThread.CurrentCulture = ci;*/
+            DateTime dateTime = DateTime.Now;
         }
 
         /*Function to retrieve all instances of an id in the log database and display it to the viewer
@@ -41,7 +48,7 @@ namespace dbConnectAnd
             {
                 string sql =string.Format("SELECT * FROM entry_log WHERE student_id = '{0}' ", student_id.ToLower());
 
-                conn = new MySqlConnection("server = 192.168.1.27; user = root; database = lab1_log ; port = 3306; password = admin123;");
+                conn = new MySqlConnection("server = 192.168.1.27; user = db_admin; database = lab_log ; port = 3306; password = angelus04;");
 
                 cmd = new MySqlCommand(sql, conn);//Execute the select statement againt the lab1_log db
 
@@ -57,15 +64,22 @@ namespace dbConnectAnd
             }
             catch (Exception ex)
             {
-                MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error");//Capture Error
+                System.Windows.MessageBox.Show(string.Format("An error occurred {0}", ex.Message), "Error");//Capture Error
             }
             finally
             {
                 if (conn != null) conn.Close();//Close Connection
             }
         }
+
+       /* private void searchDB()
+        {
+            if(txtRegNum)
+        }*/
+
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+
             search();
         }
 

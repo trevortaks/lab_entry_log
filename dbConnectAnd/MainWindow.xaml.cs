@@ -25,7 +25,8 @@ namespace dbConnectAnd
     public partial class MainWindow : Window
     {
         MySqlDataReader data;//Variable for executing and storing data from db
-
+        List<string> inlab = new List<string>();
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -40,14 +41,22 @@ namespace dbConnectAnd
         */
         public void getData()
         {
+
             string student_id = txtRegNum.Text;//Get student id from textbox
-            try
+            if (inlab.Contains(student_id))
             {
-                queryString(student_id.ToLower());//Parse student id to query function
+                logout(student_id);
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);//throw an error via Messagebox incase of Fatal Failure
+                try
+                {
+                    queryString(student_id.ToLower());//Parse student id to query function
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);//throw an error via Messagebox incase of Fatal Failure
+                }
             }
 
         }
@@ -59,7 +68,7 @@ namespace dbConnectAnd
             the query function which pushes the data to the database
         */
 
-        public void pushData()
+        private void pushData()
         {
             //Get student data from the labels on the MainWindow
             string student_id = Convert.ToString(lblRegNum.Content);
@@ -95,58 +104,77 @@ namespace dbConnectAnd
             Issue: The function hangs for a secomd or two on first id scan.Probably first connection to db
             still to look for fix
         */
-        public void queryString(string student_id, params string[] student_name)
+        private void queryString(string student_id)
         {
             using (var conn = Connection.GetConnection())//Get connection to database
             {
                 conn.Open();//Open connection to db
-                /*
-                    this piece of code checks if a second parameter was parsed and then 
-                    acts on that data to write or retrieve from database
-                */
-                if (student_name.Length > 0)//Check if params string[] student_name has any data, skip otherwise
-                {
-                    string year = DateTime.Now.ToString("yyyy-MM-dd");
-                    string time = DateTime.Now.ToString("HH:mm:ss");//Get time from system
-                    //Create a SQL command to insert the data parsed and the time into database
-                    MySqlCommand get = conn.CreateCommand();
-                    get.CommandText = string.Format("INSERT INTO entry_log(student_id, student_name, year, time) VALUES ('{0}', '{1}', '{2}', '{3}') ", student_id, student_name[0], year, time);
-                    data = get.ExecuteReader();
 
+                //Create a SQL string to retrieve data from database and execute it
+                MySqlCommand get = conn.CreateCommand();
+                get.CommandText = "SELECT * FROM student_details WHERE student_id= '" + student_id + "'";
+                data = get.ExecuteReader();
+
+                if (data.HasRows)//Check if any data was found in the db
+                {
+                    while (data.Read())//read through the data
+                    {
+                        //Fill the labels with data received from database
+                        lblRegNum.Content = data.GetString(data.GetOrdinal("student_id"));
+                        lblName.Content = data.GetString(data.GetOrdinal("student_name"));
+                        lblProgram.Content = data.GetString(data.GetOrdinal("student_prog"));
+                        lblTime.Content = DateTime.Now.ToString("HH:mm:ss");
+                    }
+                    pushData();//Call on the pushData function to act on the data
+                    inlab.Add(student_id);
                 }
-                else//If only one parameter was passed execute this
+                else
                 {
-                    //Create a SQL string to retrieve data from database and execute it
-                    MySqlCommand get = conn.CreateCommand();
-                    get.CommandText = "SELECT * FROM student_details WHERE student_id= '" + student_id + "'";
-                    data = get.ExecuteReader();
-
-                    if (data.HasRows)//Check if any data was found in the db
-                    {
-                        while (data.Read())//read through the data
-                        {
-                            //Fill the labels with data received from database
-                            lblRegNum.Content = data.GetString(data.GetOrdinal("student_id"));
-                            lblName.Content = data.GetString(data.GetOrdinal("student_name"));
-                            lblProgram.Content = data.GetString(data.GetOrdinal("student_prog"));
-                            lblTime.Content = DateTime.Now.ToString("HH:mm:ss");
-                        }
-                        pushData();//Call on the pushData function to act on the data
-                    }
-                    else
-                    {
-                        //if student id was not found, take appropiate action and inform user
-                        lblRegNum.Content = "";
-                        lblName.Content = "";
-                        lblProgram.Content = "";
-                        lblTime.Content = "";
-                        //Update the Status label with relevant information
-                        lblStatus.Content = "Error:Student Registration Number "+ student_id +" does not exist. Please check your input and try again." ;
-                        lblStatus.FontSize = 12;
-                        txtRegNum.Text = "";
-                    }
+                    //if student id was not found, take appropiate action and inform user
+                    lblReset();
+                    //Update the Status label with relevant information
+                    lblStatus.Content = "Error:Student Registration Number "+ student_id +" does not exist. Please check your input and try again." ;
+                    lblStatus.FontSize = 12;
+                    
                 }
             }
+        }
+
+        private void lblReset()
+        {
+            lblRegNum.Content = "";
+            lblName.Content = "";
+            lblProgram.Content = "";
+            lblTime.Content = "";
+            txtRegNum.Text = "";
+        }
+
+        private void queryString(string student_id, params string[] student_name)
+        {
+            using (var conn = Connection.GetConnection())//Get connection to database
+            {
+                conn.Open();//Open connection to db
+                //Create a SQL command to insert the data parsed and the time into database
+                MySqlCommand get = conn.CreateCommand();
+                get.CommandText = string.Format("INSERT INTO entry_log(student_id, student_name, date, entry_time) VALUES ('{0}', '{1}', CURDATE(), TIME(NOW()) ) ", student_id, student_name[0]);
+                get.ExecuteNonQuery();
+
+            }
+        }
+
+        public void logout(string student_id)
+        {
+            using (var conn = Connection.GetConnection())//Get connection to database
+            {
+                conn.Open();//Open connection to db
+                MySqlCommand get = conn.CreateCommand();
+                get.CommandText =string.Format(" UPDATE entry_log SET logout_time = TIME(NOW()) where student_id = '{0}' ORDER BY entry_id DESC LIMIT 1", student_id);
+                get.ExecuteNonQuery();
+            }
+            lblReset();
+            lblStatus.Content = "Logout";
+            inlab.Remove(student_id);
+
         }
 
         /*
@@ -165,7 +193,9 @@ namespace dbConnectAnd
         {
             if (e.Key == Key.Return || e.Key == Key.Enter)
             {
+
                 getData();//call function getData()
+         
             }
         }
 
@@ -180,6 +210,10 @@ namespace dbConnectAnd
             var window = new searchDB();
             window.Show();
         }
+
+        private void txtRegNum_TextChanged(object sender, TextChangedEventArgs e) {
+
+        }
     }
 
     /*
@@ -191,14 +225,14 @@ namespace dbConnectAnd
         public static MySqlConnection GetConnection()
         {
                 MySqlConnection conn = new MySqlConnection();//Create new mysql connection object
-                conn.ConnectionString = "server = 192.168.1.27; user = root; database = lab1_log ; port = 3306; password = admin123;";
+                conn.ConnectionString = "server = 192.168.1.27; user = db_admin; database = lab_log ; port = 3306; password = angelus04;";
                 return conn;//return the connection object to calling function
         }
     }
 }
 
 /*
-    Future Work other
+    Future Work
 
     -Come up with appropriate name for the Program
     -Add more functionality to the program 
