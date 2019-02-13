@@ -18,7 +18,7 @@ namespace dbConnectAnd
             conn.Open();
         }
 
-        public MySqlConnection conn { get; }
+        public extern MySqlConnection conn { get; }
 
         ~dbConnector()
         {

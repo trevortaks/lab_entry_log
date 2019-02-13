@@ -16,7 +16,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Globalization;
 using System.Threading;
-using Xceed.Wpf.Toolkit;
+//using Xceed.Wpf.Toolkit;
 
 namespace dbConnectAnd
 {
@@ -46,9 +46,9 @@ namespace dbConnectAnd
             string student_id = txtRegNum.Text;//Get student id from text box
             try
             {
-                string sql =string.Format("SELECT * FROM entry_log WHERE student_id = '{0}' ", student_id.ToLower());
+                string sql =string.Format("SELECT * FROM entry_log WHERE student_reg = '{0}' ", student_id.ToLower());
 
-                conn = new MySqlConnection("server = 192.168.1.27; user = db_admin; database = lab_log ; port = 3306; password = angelus04;");
+                conn = new MySqlConnection("server = localhost; user = trevortaks; database = lab_log ; port = 3306; password = angelus04;");
 
                 cmd = new MySqlCommand(sql, conn);//Execute the select statement againt the lab1_log db
 

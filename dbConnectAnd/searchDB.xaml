@@ -23,6 +23,6 @@
         <Button x:Name="btnSubmit" Content="Submit" HorizontalAlignment="Left" Margin="38,21,0,0" Width="127" Click="button_Click" Grid.Column="7" FontSize="26.667" Height="47" VerticalAlignment="Top"/>
         <DataGrid x:Name="dataGridView" Margin="1,90,0,0" Grid.ColumnSpan="5" Grid.Column="4" FontSize="18.667"/>
         <DatePicker x:Name="dtpPicker" Margin="27,23,25,0" Grid.Column="5" FontSize="26.667" SelectedDateFormat="Short" Height="47" VerticalAlignment="Top"  />
-        <xctk:TimePicker x:Name="tpTime" HorizontalAlignment="Left" Width="226" FontSize="26.667" Grid.Column="6" Margin="21,23,0,0" Format="Custom" FormatString="HH:mm:ss " Height="47" VerticalAlignment="Top" />
+        <!--<xctk:TimePicker x:Name="tpTime" HorizontalAlignment="Left" Width="226" FontSize="26.667" Grid.Column="6" Margin="21,23,0,0" Format="Custom" FormatString="HH:mm:ss " Height="47" VerticalAlignment="Top" />-->
     </Grid>
 </Window>

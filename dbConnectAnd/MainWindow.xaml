@@ -7,7 +7,14 @@
         xmlns:local="clr-namespace:dbConnectAnd"
         mc:Ignorable="d"
         Title="Computer Laboratory Security Logging System (Name Subject to Change)" Height="548" Width="689">
-    <Grid Margin="0,0,2,106">
+    <Grid Margin="0,0,2,106" OpacityMask="Black">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                <GradientStop Color="#FFA9A8AC" Offset="1"/>
+                <GradientStop Color="White"/>
+                <GradientStop Color="#FFC6C4C7" Offset="0.52"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="40*"/>
             <RowDefinition Height="69*"/>

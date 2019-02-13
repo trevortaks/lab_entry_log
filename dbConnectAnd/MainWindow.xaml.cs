@@ -112,7 +112,7 @@ namespace dbConnectAnd
 
                 //Create a SQL string to retrieve data from database and execute it
                 MySqlCommand get = conn.CreateCommand();
-                get.CommandText = "SELECT * FROM student_details WHERE student_id= '" + student_id + "'";
+                get.CommandText = "SELECT * FROM student_details WHERE student_reg= '" + student_id + "'";
                 data = get.ExecuteReader();
 
                 if (data.HasRows)//Check if any data was found in the db
@@ -120,7 +120,7 @@ namespace dbConnectAnd
                     while (data.Read())//read through the data
                     {
                         //Fill the labels with data received from database
-                        lblRegNum.Content = data.GetString(data.GetOrdinal("student_id"));
+                        lblRegNum.Content = data.GetString(data.GetOrdinal("student_reg"));
                         lblName.Content = data.GetString(data.GetOrdinal("student_name"));
                         lblProgram.Content = data.GetString(data.GetOrdinal("student_prog"));
                         lblTime.Content = DateTime.Now.ToString("HH:mm:ss");
@@ -156,7 +156,7 @@ namespace dbConnectAnd
                 conn.Open();//Open connection to db
                 //Create a SQL command to insert the data parsed and the time into database
                 MySqlCommand get = conn.CreateCommand();
-                get.CommandText = string.Format("INSERT INTO entry_log(student_id, student_name, date, entry_time) VALUES ('{0}', '{1}', CURDATE(), TIME(NOW()) ) ", student_id, student_name[0]);
+                get.CommandText = string.Format("INSERT INTO entry_log(student_reg, student_name, date, entry_time) VALUES ('{0}', '{1}', CURDATE(), TIME(NOW()) ) ", student_id, student_name[0]);
                 get.ExecuteNonQuery();
 
             }
@@ -168,7 +168,7 @@ namespace dbConnectAnd
             {
                 conn.Open();//Open connection to db
                 MySqlCommand get = conn.CreateCommand();
-                get.CommandText =string.Format(" UPDATE entry_log SET logout_time = TIME(NOW()) where student_id = '{0}' ORDER BY entry_id DESC LIMIT 1", student_id);
+                get.CommandText =string.Format(" UPDATE entry_log SET logout_time = TIME(NOW()) where student_reg = '{0}' ORDER BY log_id DESC LIMIT 1", student_id);
                 get.ExecuteNonQuery();
             }
             lblReset();
@@ -225,7 +225,7 @@ namespace dbConnectAnd
         public static MySqlConnection GetConnection()
         {
                 MySqlConnection conn = new MySqlConnection();//Create new mysql connection object
-                conn.ConnectionString = "server = 192.168.1.27; user = db_admin; database = lab_log ; port = 3306; password = angelus04;";
+                conn.ConnectionString = "server = localhost; user = trevortaks; database = lab_log ; port = 3306; password = angelus04;";
                 return conn;//return the connection object to calling function
         }
     }
@@ -240,11 +240,12 @@ namespace dbConnectAnd
         -search by name
         -search by ID
         -Daily, Weekly and Monthly Reports on lab activity
-        -intergrate logout time if possible
+        -intergrate logout time if possible(Done)
         -Make a better user interface
     -Make program more modular
         -less dependent on the window 
         -add classes for appropriate actions
+        -Connect to Database via ADO>NET
     -Fix Issues
         -Fix a few second hang on scanning of first id
 */
