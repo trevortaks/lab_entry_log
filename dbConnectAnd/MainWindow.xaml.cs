@@ -246,6 +246,7 @@ namespace dbConnectAnd
         -less dependent on the window 
         -add classes for appropriate actions
         -Connect to Database via ADO>NET
+ * +
     -Fix Issues
         -Fix a few second hang on scanning of first id
 */
